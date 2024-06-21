@@ -16,11 +16,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Spring Build
-        run: mvn package
+      - name: Gradle Build
+        run: ./gradlew build
 
       - name: Docker Image Build
-        run: docker build --build-arg JAR_FILE=target/*.jar --tag hana-server .
+        run: docker build --build-arg JAR_FILE=build/libs/*.jar --tag hana-server .
 
       - name: Docker Hub Login
         uses: docker/login-action@v2
