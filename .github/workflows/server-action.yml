@@ -30,3 +30,16 @@ jobs:
 
       - name: Docker Hub Push
         run: docker push rlawjddn5980/hana-server:latest
+
+      - name: Connect to WAS & Execute Application
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.WAS_HOST }}
+          username: ${{ secrets.WAS_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            docker stop $(docker ps -a -q) 
+            docker rm $(docker ps -a -q) 
+            docker pull rlawjddn5980/hana-server:latest
+            docker run -d -p 8080:8080 --name hana-server rlawjddn5980/hana-server:latest
