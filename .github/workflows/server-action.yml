@@ -20,7 +20,7 @@ jobs:
         run: ./gradlew build
 
       - name: Docker Image Build
-        run: docker build --build-arg JAR_FILE=build/libs/*.jar --tag hana-server .
+        run: docker build --build-arg JAR_FILE=build/libs/*.jar --tag rlawjddn5980/hana-server:latest .
 
       - name: Docker Hub Login
         uses: docker/login-action@v2
@@ -29,4 +29,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Docker Hub Push
-        run: docker push hana-server
+        run: docker push rlawjddn5980/hana-server:latest
