@@ -20,6 +20,8 @@ jobs:
         run: ./gradlew build
 
       - name: Docker Image Build
+        env:
+          DOCKER_BUILDKIT: 1
         run: docker build --build-arg JAR_FILE=build/libs/*.jar --tag rlawjddn5980/hana-server:latest .
 
       - name: Docker Hub Login
@@ -39,7 +41,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            sudo docker stop $(docker ps -a -q) 
-            sudo docker rm $(docker ps -a -q) 
+            sudo docker stop $(docker ps -a -q)
+            sudo docker rm $(docker ps -a -q)
+            sudo docker rmi rlawjddn5980/hana-server:latest
             sudo docker pull rlawjddn5980/hana-server:latest
             sudo docker run -d -p 8080:8080 --name hana-server rlawjddn5980/hana-server:latest
