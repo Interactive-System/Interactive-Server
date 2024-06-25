@@ -10,7 +10,7 @@ public class JasyptConfig {
     @Bean("jasyptStringEncryptor")
     public StandardPBEStringEncryptor jasyptConfigure() {
         StandardPBEStringEncryptor jasypt = new StandardPBEStringEncryptor();
-        jasypt.setPassword("dogfoot");
+        jasypt.setPassword("hana");
         jasypt.setAlgorithm("PBEWithMD5AndDES");
         return jasypt;
     }
