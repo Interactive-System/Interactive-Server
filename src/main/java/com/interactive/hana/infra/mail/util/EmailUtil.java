@@ -40,12 +40,12 @@ public class EmailUtil {
                 "                            <div style=\"padding-top:0px;padding-bottom:0px;vertical-align:top;text-align:center\"><a\n" +
                 "                                    href=\"https://www.google.com\" target=\"_blank\"\n" +
                 "                                    data-saferedirecturl=\"https://www.google.com/\"><img\n" +
-                "                                        src=\"https://lh3.googleusercontent.com/pw/ACtC-3eJ3j24cae2ZlqqBLj9E1IPhFZmIrUWuQDDaJCWLJ0qCxEHhB2VFaHbnN2vNGxRUBJ7Ngpot39Mj10UAHFOE7l7QRlgfWHBK3tCpcq5VGc7Ag3u7AXjWAF-ESnpUQoVLEZg-rpiNr6T2MldJ4Tvhjw=s200-no?authuser=0\"\n" +
-                "                                        height=\"150\" alt=\"DogFoot logo\" style=\"border:0\" class=\"CToWUd\"></a></div>\n" +
+                "                                        src=\"https://lh3.googleusercontent.com/d/10KqwpIA0I84HChT31fzbaKR6UEMDb-40\"\n" +
+                "                                        height=\"150\" alt=\"InteractiveHana logo\" style=\"border:0\" class=\"CToWUd\"></a></div>\n" +
                 "                            <hr style=\"margin-top:0px;margin-bottom:24px;border:0;border-bottom:1px solid #c1c7d0\">\n" +
                 "                            <h2\n" +
                 "                                style=\"margin-bottom:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;font-size:20px;font-weight:500;color:#172b4d;line-height:24px;margin-top:28px\">\n" +
-                "                                <span>DogFoot</span> 회원가입 인증 메일</h2>\n" +
+                "                                <span>Hana</span> 회원가입 인증 메일</h2>\n" +
                 "                            <p\n" +
                 "                                style=\"font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;font-size:14px;font-weight:400;color:#091e42;line-height:20px;margin-top:12px\">\n" +
                 "                                안녕하세요.</p>\n" +
@@ -56,7 +56,7 @@ public class EmailUtil {
                 "                                <tbody>\n" +
                 "                                    <tr>\n" +
                 "                                        <td align=\"center\">\n" +
-                "                                            <a style=\\\"text-decoration: none; font-size: 20px; color: #011627\\\"\n" +
+                "                                            <a style=\"text-decoration: none; font-size: 20px; color: #011627\"\n" +
                 "                                                href='http://localhost:8080/api/v1/email-auth?email=" + email + "&authCode=" + authCode + "'>이메일 인증</a>\n" +
                 "                                        </td>\n" +
                 "                                    </tr>\n" +
@@ -70,13 +70,13 @@ public class EmailUtil {
                 "                                        <tr>\n" +
                 "                                            <td valign=\"top\" align=\"center\"\n" +
                 "                                                style=\"padding-top:10px;line-height:18px;text-align:center;font-weight:none;font-size:12px;color:#505f79\">\n" +
-                "                                                <span>이 메시지는 DogFoot에서 전송되었습니다.</span><br></td>\n" +
+                "                                                <span>이 메시지는 Hana에서 전송되었습니다.</span><br></td>\n" +
                 "                                        </tr>\n" +
                 "                                        <tr valign=\"top\">\n" +
                 "                                            <td align=\"center\" style=\"padding-top:15px;padding-bottom:30px\"><a\n" +
                 "                                                    href=\"https://www.dogfoot.com\" target=\"_blank\"\n" +
                 "                                                    data-saferedirecturl=\"https://www.google.com\"><img\n" +
-                "                                                        src=\"https://lh3.googleusercontent.com/pw/ACtC-3eJ3j24cae2ZlqqBLj9E1IPhFZmIrUWuQDDaJCWLJ0qCxEHhB2VFaHbnN2vNGxRUBJ7Ngpot39Mj10UAHFOE7l7QRlgfWHBK3tCpcq5VGc7Ag3u7AXjWAF-ESnpUQoVLEZg-rpiNr6T2MldJ4Tvhjw=s200-no?authuser=0\"\n" +
+                "                                                        src=\"https://lh3.googleusercontent.com/d/10KqwpIA0I84HChT31fzbaKR6UEMDb-40\"\n" +
                 "                                                        width=\"50\" border=\"0\" alt=\"Atlassian\"\n" +
                 "                                                        style=\"display:block;color:#4c9ac9\" class=\"CToWUd\"></a></td>\n" +
                 "                                        </tr>\n" +
@@ -91,6 +91,7 @@ public class EmailUtil {
                 "    </table>";
     }
 
+
     public String getFindEmailMessage(String email) {
         return "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n" +
                 "        <tbody>\n" +
@@ -103,11 +104,11 @@ public class EmailUtil {
                 "                                    href=\"https://www.google.com\" target=\"_blank\"\n" +
                 "                                    data-saferedirecturl=\"https://www.google.com/\"><img\n" +
                 "                                        src=\"https://lh3.googleusercontent.com/pw/ACtC-3c04Gv-k45cMqMbwSpHLtBOXanwyyU4NJ7CCEImXO7Ea5W27F0KzqWm7ClWu96vPF1F9e9VWs4VfS-zqMY5EOwvi1hySnsMPuDA7I-bmfO4k9wb0o3CrCWE0uzCTaHVW7H6nW2oXvo5Irn8J9Acn98=w1280-h720-no?authuser=4\"\n" +
-                "                                        height=\"150\" alt=\"DogFoot logo\" style=\"border:0\" class=\"CToWUd\"></a></div>\n" +
+                "                                        height=\"150\" alt=\"InteractiveHana logo\" style=\"border:0\" class=\"CToWUd\"></a></div>\n" +
                 "                            <hr style=\"margin-top:0px;margin-bottom:24px;border:0;border-bottom:1px solid #c1c7d0\">\n" +
                 "                            <h2\n" +
                 "                                style=\"margin-bottom:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;font-size:20px;font-weight:500;color:#172b4d;line-height:24px;margin-top:28px\">\n" +
-                "                                <span>DogFoot</span> 이메일 찾기 안내 메일</h2>\n" +
+                "                                <span>InteractiveHana</span> 이메일 찾기 안내 메일</h2>\n" +
                 "                            <p\n" +
                 "                                style=\"font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;font-size:14px;font-weight:400;color:#091e42;line-height:20px;margin-top:12px\">\n" +
                 "                                안녕하세요.</p>\n" +
@@ -131,7 +132,7 @@ public class EmailUtil {
                 "                                        <tr>\n" +
                 "                                            <td valign=\"top\" align=\"center\"\n" +
                 "                                                style=\"padding-top:10px;line-height:18px;text-align:center;font-weight:none;font-size:12px;color:#505f79\">\n" +
-                "                                                <span>이 메시지는 DogFoot에서 전송되었습니다.</span><br></td>\n" +
+                "                                                <span>이 메시지는 InteractiveHana에서 전송되었습니다.</span><br></td>\n" +
                 "                                        </tr>\n" +
                 "                                        <tr valign=\"top\">\n" +
                 "                                            <td align=\"center\" style=\"padding-top:15px;padding-bottom:30px\"><a\n" +
@@ -168,7 +169,7 @@ public class EmailUtil {
                 "                            <hr style=\"margin-top:0px;margin-bottom:24px;border:0;border-bottom:1px solid #c1c7d0\">\n" +
                 "                            <h2\n" +
                 "                                style=\"margin-bottom:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;font-size:20px;font-weight:500;color:#172b4d;line-height:24px;margin-top:28px\">\n" +
-                "                                <span>DogFoot</span> 임시 비밀번호 안내 메일</h2>\n" +
+                "                                <span>InteractiveHana</span> 임시 비밀번호 안내 메일</h2>\n" +
                 "                            <p\n" +
                 "                                style=\"font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;font-size:14px;font-weight:400;color:#091e42;line-height:20px;margin-top:12px\">\n" +
                 "                                안녕하세요.</p>\n" +
@@ -192,7 +193,7 @@ public class EmailUtil {
                 "                                        <tr>\n" +
                 "                                            <td valign=\"top\" align=\"center\"\n" +
                 "                                                style=\"padding-top:10px;line-height:18px;text-align:center;font-weight:none;font-size:12px;color:#505f79\">\n" +
-                "                                                <span>이 메시지는 DogFoot에서 전송되었습니다.</span><br></td>\n" +
+                "                                                <span>이 메시지는 InteractiveHana에서 전송되었습니다.</span><br></td>\n" +
                 "                                        </tr>\n" +
                 "                                        <tr valign=\"top\">\n" +
                 "                                            <td align=\"center\" style=\"padding-top:15px;padding-bottom:30px\"><a\n" +

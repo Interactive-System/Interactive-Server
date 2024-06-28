@@ -15,13 +15,19 @@ import lombok.Getter;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class UserInfoResponse {
 
+    private final String email;
     private final String name;
+    private final String phoneNumber;
+    private final String address;
     private final UserRoleType role;
     private final String roleName;
 
     public static UserInfoResponse from(User user) {
         return UserInfoResponse.builder()
+                .email(user.getEmail())
                 .name(user.getName())
+                .phoneNumber(user.getPhoneNumber())
+                .address(user.getAddress())
                 .role(user.getRole())
                 .roleName(user.getRole().getName())
                 .build();
