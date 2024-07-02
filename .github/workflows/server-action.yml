@@ -44,8 +44,12 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            sudo docker stop $(docker ps -a -q)
-            sudo docker rm $(docker ps -a -q)
-            sudo docker rmi rlawjddn5980/hana-server:latest
+            if [ "$(sudo docker ps -q -f name=hana-server)" ]; then
+              sudo docker stop hana-server
+            fi
+            if [ "$(sudo docker ps -a -q -f name=hana-server)" ]; then
+              sudo docker rm hana-server
+            fi
+            sudo docker rmi rlawjddn5980/hana-server:latest --force
             sudo docker pull rlawjddn5980/hana-server:latest
             sudo docker run -d -p 8080:8080 --name hana-server rlawjddn5980/hana-server:latest
