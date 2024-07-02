@@ -19,6 +19,9 @@ jobs:
       - name: Gradle Build
         run: ./gradlew build
 
+      - name: Verify Build Output
+        run: ls -la build/libs
+
       - name: Docker Image Build
         env:
           DOCKER_BUILDKIT: 1
