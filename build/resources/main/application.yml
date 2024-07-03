@@ -3,7 +3,7 @@ spring:
     name: hana-server
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://13.124.207.110:3306/insurance?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://mysql_container:3306/insurance?serverTimezone=Asia/Seoul
     username: root
     password: root
 
