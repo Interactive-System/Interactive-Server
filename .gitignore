@@ -1,0 +1,104 @@
+# 컴파일된 클래스 파일
+*.class
+
+# 로그 파일
+*.log
+
+# 빌드 디렉토리
+/build/
+/target/
+
+# IntelliJ IDEA 파일
+*.iml
+.idea/
+*.iws
+*.ipr
+
+# Eclipse 파일
+.project
+.classpath
+.settings/
+
+# VS Code 파일
+.vscode/
+
+# OS 별 파일
+.DS_Store
+Thumbs.db
+
+# Maven
+.mvn/
+!/.mvn/wrapper/maven-wrapper.jar
+**/mvnw
+**/mvnw.cmd
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+**/gradlew
+**/gradlew.bat
+
+# 환경 변수 파일
+.env
+
+# JUnit5
+.testcontainers.properties
+
+# 기타
+*.war
+*.ear
+*.jar
+
+# Lombok
+.lombok/
+
+# 특정 IDE에서 생성되는 파일
+# Windows
+*.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.idea/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Linux
+*~
+
+# node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Spring Boot 라이브러리
+.spring-boot-devtools.properties
+
+# Java 관련 파일
+*.log
+*.war
+*.ear
+*.jar
+
+# 환경 설정 파일
+*.properties
+*.yml
+*.yaml
+
+# 기타
+*.bak
+*.tmp
+*.swp
+*.swo
+*.swd
+*.seed
+*.pid
+*.pid.lock
+*.seed.lock
