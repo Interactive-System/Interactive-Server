@@ -57,7 +57,7 @@ public class EmailUtil {
                 "                                    <tr>\n" +
                 "                                        <td align=\"center\">\n" +
                 "                                            <a style=\"text-decoration: none; font-size: 20px; color: #011627\"\n" +
-                "                                                href='http://localhost:8080/api/v1/email-auth?email=" + email + "&authCode=" + authCode + "'>이메일 인증</a>\n" +
+                "                                                href='http://13.124.207.110:8080/api/v1/email-auth?email=" + email + "&authCode=" + authCode + "'>이메일 인증</a>\n" +
                 "                                        </td>\n" +
                 "                                    </tr>\n" +
                 "                                </tbody>\n" +
