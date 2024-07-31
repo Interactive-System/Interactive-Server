@@ -19,6 +19,6 @@ public class EmailAuthController {
     @GetMapping("email-auth")
     public void emailAuth(HttpServletResponse response, String email, String authCode) throws IOException {
         emailAuthService.emailValidate(email, authCode);
-        response.sendRedirect("http://localhost:3000");
+        response.sendRedirect("http://13.124.207.110:3000");
     }
 }
