@@ -52,8 +52,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasAnyRole("INSURANCE_COMPENSATION_HANDLER", "ADMIN")
                 .antMatchers("/api/v1/admin/**")
                 .hasRole("ADMIN")
+                .antMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll() // Swagger UI 및 OpenAPI 문서에 대한 접근 허용
                 .anyRequest()
-                .permitAll();
+                .authenticated();
     }
-
 }
