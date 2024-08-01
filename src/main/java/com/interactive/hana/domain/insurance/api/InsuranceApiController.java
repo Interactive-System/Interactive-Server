@@ -22,7 +22,7 @@ public interface InsuranceApiController<DetailReq> {
     @GetMapping("insurance/{id}")
     ResponseEntity<DetailReq> detail(@PathVariable Long id);
 
-    @GetMapping("insurance/count")
+    @GetMapping("insurance/dashboard/count")
     ResponseEntity<CountResponse> getCount();
 
 }

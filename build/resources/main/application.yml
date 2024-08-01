@@ -37,6 +37,7 @@
 #  metrics:
 #    tags:
 #      application: ${spring.application.name}
+
 spring:
   application:
     name: hana-server
