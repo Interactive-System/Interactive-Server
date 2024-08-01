@@ -1,6 +1,7 @@
 package com.interactive.hana.domain.insurance.service;
 
 import com.interactive.hana.domain.insurance.domain.Insurance;
+import com.interactive.hana.domain.insurance.dto.CountResponse;
 import com.interactive.hana.domain.insurance.dto.InsuranceResponse;
 import com.interactive.hana.global.dto.PaginationDto;
 import org.springframework.data.domain.Pageable;
@@ -22,4 +23,5 @@ public interface InsuranceService<DetailRes, T extends Insurance> {
 
     Specification<T> getUnAvailableSpecification();
 
+    CountResponse getCount();
 }

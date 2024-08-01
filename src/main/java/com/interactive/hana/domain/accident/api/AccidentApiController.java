@@ -36,5 +36,4 @@ public class AccidentApiController {
     public ResponseEntity<AccidentDetailResponse> accidentDetail(@PathVariable Long id) {
         return ResponseEntity.ok(AccidentDetailResponse.from(this.accidentService.findById(id)));
     }
-
 }

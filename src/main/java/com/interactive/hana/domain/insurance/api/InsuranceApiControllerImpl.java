@@ -1,6 +1,7 @@
 package com.interactive.hana.domain.insurance.api;
 
 import com.interactive.hana.domain.insurance.domain.Insurance;
+import com.interactive.hana.domain.insurance.dto.CountResponse;
 import com.interactive.hana.domain.insurance.dto.InsuranceResponse;
 import com.interactive.hana.domain.insurance.service.InsuranceService;
 import com.interactive.hana.global.dto.PaginationDto;
@@ -33,4 +34,8 @@ public abstract class InsuranceApiControllerImpl<DetailReq, I extends Insurance>
         return ResponseEntity.ok(this.insuranceService.read(id));
     }
 
+    @Override
+    public ResponseEntity<CountResponse> getCount() {
+        return ResponseEntity.ok(this.insuranceService.getCount());
+    }
 }

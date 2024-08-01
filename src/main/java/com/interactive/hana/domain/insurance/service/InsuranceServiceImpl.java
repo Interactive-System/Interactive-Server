@@ -2,6 +2,8 @@ package com.interactive.hana.domain.insurance.service;
 
 import com.interactive.hana.domain.insurance.dao.InsuranceRepository;
 import com.interactive.hana.domain.insurance.domain.Insurance;
+import com.interactive.hana.domain.insurance.domain.InsuranceType;
+import com.interactive.hana.domain.insurance.dto.CountResponse;
 import com.interactive.hana.domain.insurance.dto.InsuranceResponse;
 import com.interactive.hana.domain.insurance.exception.InsuranceExceptionMessages;
 import com.interactive.hana.domain.insurance.exception.InsuranceNotFoundException;
@@ -57,4 +59,17 @@ public abstract class InsuranceServiceImpl<DetailRes, T extends Insurance> imple
                 .orElseThrow(() -> new InsuranceNotFoundException(InsuranceExceptionMessages.INSURANCE_NOT_FOUND_EXCEPTION_MESSAGE));
     }
 
+    @Override
+    public CountResponse getCount() {
+        int carCount = 0, travelCount = 0;
+        for (T t : this.insuranceRepository.findAll()) {
+            String dtype = t.getDtype();
+            if (dtype.toUpperCase().equals(InsuranceType.CAR.name())) {
+                carCount++;
+            } else if(dtype.toUpperCase().equals(InsuranceType.TRAVEL.name())) {
+                travelCount++;
+            }
+        }
+        return CountResponse.from(carCount, travelCount);
+    }
 }

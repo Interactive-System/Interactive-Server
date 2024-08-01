@@ -1,5 +1,6 @@
 package com.interactive.hana.domain.insurance.api;
 
+import com.interactive.hana.domain.insurance.dto.CountResponse;
 import com.interactive.hana.domain.insurance.dto.InsuranceResponse;
 import com.interactive.hana.global.dto.PaginationDto;
 import org.springframework.data.domain.Pageable;
@@ -20,5 +21,8 @@ public interface InsuranceApiController<DetailReq> {
 
     @GetMapping("insurance/{id}")
     ResponseEntity<DetailReq> detail(@PathVariable Long id);
+
+    @GetMapping("insurance/count")
+    ResponseEntity<CountResponse> getCount();
 
 }
