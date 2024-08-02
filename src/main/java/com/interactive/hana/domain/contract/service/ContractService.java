@@ -2,6 +2,7 @@ package com.interactive.hana.domain.contract.service;
 
 import com.interactive.hana.domain.contract.domain.Contract;
 import com.interactive.hana.domain.contract.dto.CalculatePaymentResponse;
+import com.interactive.hana.domain.contract.dto.UwStateCountResponse;
 import com.interactive.hana.domain.insurance.domain.Insurance;
 import com.interactive.hana.global.config.security.auth.PrincipalDetails;
 import com.interactive.hana.global.dto.PaginationDto;
@@ -34,4 +35,6 @@ public interface ContractService<I extends Insurance, CreateReq, Res, C extends 
 
     @Transactional
     void uwReject(PrincipalDetails principal, Long id);
+
+    UwStateCountResponse getUwStateCount();
 }

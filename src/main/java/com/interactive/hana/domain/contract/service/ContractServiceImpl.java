@@ -2,11 +2,15 @@ package com.interactive.hana.domain.contract.service;
 
 import com.interactive.hana.domain.contract.dao.ContractRepository;
 import com.interactive.hana.domain.contract.domain.Contract;
+import com.interactive.hana.domain.contract.domain.UwDueProcessType;
 import com.interactive.hana.domain.contract.dto.CalculatePaymentResponse;
 import com.interactive.hana.domain.contract.dto.ContractCreateRequest;
+import com.interactive.hana.domain.contract.dto.UwStateCountResponse;
 import com.interactive.hana.domain.contract.exception.ContractExceptionMessages;
 import com.interactive.hana.domain.contract.exception.ContractNotFoundException;
 import com.interactive.hana.domain.insurance.domain.Insurance;
+import com.interactive.hana.domain.insurance.domain.InsuranceType;
+import com.interactive.hana.domain.insurance.dto.CountResponse;
 import com.interactive.hana.domain.insurance.service.InsuranceService;
 import com.interactive.hana.domain.user.domain.User;
 import com.interactive.hana.domain.user.service.UserService;
@@ -77,5 +81,21 @@ public abstract class ContractServiceImpl<C extends Contract<Res>, DetailRes, I 
     @Override
     public Contract<Res> findById(Long id) {
         return contractRepository.findById(id).orElseThrow(() -> new ContractNotFoundException(ContractExceptionMessages.CONTRACT_NOT_FOUND_EXCEPTION));
+    }
+
+    @Override
+    public UwStateCountResponse getUwStateCount() {
+        int waitCount = 0, approveCount = 0, rejectCount = 0;
+        for (C c : this.contractRepository.findAll()) {
+            UwDueProcessType uwDueProcessType = c.getUwDueProcessType();
+            if (uwDueProcessType.name().equals(UwDueProcessType.WAIT.name())) {
+                waitCount++;
+            } else if(uwDueProcessType.name().equals(UwDueProcessType.APPROVE.name())) {
+                approveCount++;
+            } else if(uwDueProcessType.name().equals(UwDueProcessType.REJECT.name())) {
+                rejectCount++;
+            }
+        }
+        return UwStateCountResponse.from(waitCount, approveCount, rejectCount);
     }
 }
