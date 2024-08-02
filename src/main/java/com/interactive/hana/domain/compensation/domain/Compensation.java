@@ -1,6 +1,7 @@
 package com.interactive.hana.domain.compensation.domain;
 
 import com.interactive.hana.domain.accident.domain.Accident;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -10,6 +11,7 @@ import java.sql.Timestamp;
 
 @NoArgsConstructor
 @Entity
+@Getter
 public class Compensation {
 
     @Id

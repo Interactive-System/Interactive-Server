@@ -21,4 +21,5 @@ public interface UserService {
 
     List<AccidentResponse> myAccidentList(PrincipalDetails principal);
 
+    User findById(Long id);
 }

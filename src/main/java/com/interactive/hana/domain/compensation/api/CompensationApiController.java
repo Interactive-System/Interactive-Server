@@ -1,8 +1,11 @@
 package com.interactive.hana.domain.compensation.api;
 
 import com.interactive.hana.domain.compensation.constant.CompensationConstants;
+import com.interactive.hana.domain.compensation.dto.CompensationAmountResponse;
 import com.interactive.hana.domain.compensation.dto.CompensationApproveRequest;
+import com.interactive.hana.domain.compensation.dto.CompensationTotalAmountResponse;
 import com.interactive.hana.domain.compensation.service.CompensationService;
+import com.interactive.hana.domain.contract.dto.ContractPerQuarterResponse;
 import com.interactive.hana.global.dto.DefaultResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +29,16 @@ public class CompensationApiController {
     public ResponseEntity<DefaultResponseDto> compensationReject(@PathVariable Long id) {
         this.CompensationService.compensationReject(id);
         return ResponseEntity.ok(DefaultResponseDto.from(CompensationConstants.REJECT_COMPENSATION.getMessage()));
+    }
+
+    @GetMapping("api/v1/user/compensation/dashboard/amount")
+    public ResponseEntity<CompensationAmountResponse> getCompensationAmount() {
+        return ResponseEntity.ok(this.CompensationService.getCompensationAmount());
+    }
+
+    @GetMapping("api/v1/user/compensation/dashboard/total/amount")
+    public ResponseEntity<CompensationTotalAmountResponse> getCompensationTotalAmount() {
+        return ResponseEntity.ok(this.CompensationService.getCompensationTotalAmount());
     }
 
 }

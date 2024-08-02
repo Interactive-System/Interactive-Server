@@ -3,6 +3,7 @@ package com.interactive.hana.domain.contract.service;
 import com.interactive.hana.domain.contract.domain.Contract;
 import com.interactive.hana.domain.contract.dto.CalculatePaymentResponse;
 import com.interactive.hana.domain.contract.dto.ContractPerQuarterResponse;
+import com.interactive.hana.domain.contract.dto.TopUsernameResponse;
 import com.interactive.hana.domain.contract.dto.UwStateCountResponse;
 import com.interactive.hana.domain.insurance.domain.Insurance;
 import com.interactive.hana.global.config.security.auth.PrincipalDetails;
@@ -39,4 +40,6 @@ public interface ContractService<I extends Insurance, CreateReq, Res, C extends 
 
     UwStateCountResponse getUwStateCount();
     ContractPerQuarterResponse getContractPerQuarter();
+
+    TopUsernameResponse getTopUsername();
 }

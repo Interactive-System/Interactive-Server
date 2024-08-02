@@ -3,10 +3,7 @@ package com.interactive.hana.domain.contract.service;
 import com.interactive.hana.domain.contract.dao.ContractRepository;
 import com.interactive.hana.domain.contract.domain.Contract;
 import com.interactive.hana.domain.contract.domain.UwDueProcessType;
-import com.interactive.hana.domain.contract.dto.CalculatePaymentResponse;
-import com.interactive.hana.domain.contract.dto.ContractCreateRequest;
-import com.interactive.hana.domain.contract.dto.ContractPerQuarterResponse;
-import com.interactive.hana.domain.contract.dto.UwStateCountResponse;
+import com.interactive.hana.domain.contract.dto.*;
 import com.interactive.hana.domain.contract.exception.ContractExceptionMessages;
 import com.interactive.hana.domain.contract.exception.ContractNotFoundException;
 import com.interactive.hana.domain.insurance.domain.Insurance;
@@ -26,7 +23,9 @@ import org.springframework.stereotype.Component;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
@@ -149,5 +148,33 @@ public abstract class ContractServiceImpl<C extends Contract<Res>, DetailRes, I 
                 travelFirstQuarterCount, travelSecondQuarterCount, travelThirdQuarterCount, travelFourthQuarterCount
         );
         return response;
+    }
+
+    @Override
+    public TopUsernameResponse getTopUsername() {
+        List<C> all = this.contractRepository.findAll();
+        Map<Long, Integer> userContractCount = new HashMap<>();
+
+        for (C c : all) {
+            Long userId = c.getUser().getId();
+            userContractCount.put(userId, userContractCount.getOrDefault(userId, 0) + 1);
+        }
+
+        Long topUserId = null;
+        int maxContracts = 0;
+
+        for (Map.Entry<Long, Integer> entry : userContractCount.entrySet()) {
+            if (entry.getValue() > maxContracts) {
+                topUserId = entry.getKey();
+                maxContracts = entry.getValue();
+            }
+        }
+
+        if (topUserId != null) {
+            User user = userService.findById(topUserId);
+            return TopUsernameResponse.from(user.getName());
+        } else {
+            return TopUsernameResponse.from("");
+        }
     }
 }

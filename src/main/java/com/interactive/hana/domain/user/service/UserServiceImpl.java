@@ -75,4 +75,9 @@ public class UserServiceImpl implements UserService {
         return this.accidentService.accidentListFindByUser(findByEmail(principal.getUsername()));
     }
 
+    @Override
+    public User findById(Long id) {
+        return this.userRepository.findById(id).get();
+    }
+
 }
