@@ -55,7 +55,7 @@ public class CompensationServiceImpl implements CompensationService {
             }
         }
 
-        return CompensationAmountResponse.from(maxAmount, minAmount);
+        return CompensationAmountResponse.from(minAmount, maxAmount);
     }
 
     @Override
