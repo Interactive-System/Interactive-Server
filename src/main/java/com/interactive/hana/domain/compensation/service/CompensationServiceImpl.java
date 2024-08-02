@@ -42,8 +42,8 @@ public class CompensationServiceImpl implements CompensationService {
             return CompensationAmountResponse.from(0L, 0L);
         }
 
-        Long maxAmount = 0L;
-        Long minAmount = 0L;
+        Long maxAmount = Long.MIN_VALUE;
+        Long minAmount = Long.MAX_VALUE;
 
         for (Compensation compensation : all) {
             Long compensationAmount = compensation.getCompensationAmount();
