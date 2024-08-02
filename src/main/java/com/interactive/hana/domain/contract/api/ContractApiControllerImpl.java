@@ -2,10 +2,7 @@ package com.interactive.hana.domain.contract.api;
 
 import com.interactive.hana.domain.contract.constant.ContractConstants;
 import com.interactive.hana.domain.contract.domain.Contract;
-import com.interactive.hana.domain.contract.dto.CalculatePaymentResponse;
-import com.interactive.hana.domain.contract.dto.ContractPerQuarterResponse;
-import com.interactive.hana.domain.contract.dto.TopUsernameResponse;
-import com.interactive.hana.domain.contract.dto.UwStateCountResponse;
+import com.interactive.hana.domain.contract.dto.*;
 import com.interactive.hana.domain.contract.service.ContractService;
 import com.interactive.hana.domain.insurance.domain.Insurance;
 import com.interactive.hana.global.config.security.auth.PrincipalDetails;
@@ -13,6 +10,8 @@ import com.interactive.hana.global.dto.DefaultResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public abstract class ContractApiControllerImpl<I extends Insurance, CreateReq, Res, C extends Contract<Res>> implements
@@ -46,5 +45,10 @@ public abstract class ContractApiControllerImpl<I extends Insurance, CreateReq, 
     @Override
     public ResponseEntity<TopUsernameResponse> getTopUsername() {
         return ResponseEntity.ok(this.contractService.getTopUsername());
+    }
+
+    @Override
+    public ResponseEntity<List<TopInsuranceResponse>> getTopInsurance() {
+        return ResponseEntity.ok(this.contractService.getTopInsurance());
     }
 }

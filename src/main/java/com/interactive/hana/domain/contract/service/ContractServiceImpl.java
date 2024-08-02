@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -176,5 +177,31 @@ public abstract class ContractServiceImpl<C extends Contract<Res>, DetailRes, I 
         } else {
             return TopUsernameResponse.from("");
         }
+    }
+
+    @Override
+    public List<TopInsuranceResponse> getTopInsurance() {
+        List<C> all = contractRepository.findAll();
+        int totalContracts = all.size();
+
+        Map<String, Map<String, Long>> dtypeCountMap = all.stream()
+                .collect(Collectors.groupingBy(C::getDtype,
+                        Collectors.groupingBy(c -> c.getInsurance().getName(), Collectors.counting())));
+
+        List<TopInsuranceResponse> topInsurances = dtypeCountMap.entrySet().stream()
+                .flatMap(entry -> entry.getValue().entrySet().stream()
+                        .map(innerEntry -> new AbstractMap.SimpleEntry<>(entry.getKey(), innerEntry)))
+                .sorted((e1, e2) -> e2.getValue().getValue().compareTo(e1.getValue().getValue()))
+                .limit(5)
+                .map(entry -> {
+                    String dtype = entry.getKey();
+                    String insuranceName = entry.getValue().getKey();
+                    int count = entry.getValue().getValue().intValue();
+                    int percentage = (int) ((double) count / totalContracts * 100);
+                    return TopInsuranceResponse.from(dtype, insuranceName, percentage);
+                })
+                .collect(Collectors.toList());
+
+        return topInsurances;
     }
 }

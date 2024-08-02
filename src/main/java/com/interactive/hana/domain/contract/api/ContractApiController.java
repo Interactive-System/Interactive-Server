@@ -1,9 +1,6 @@
 package com.interactive.hana.domain.contract.api;
 
-import com.interactive.hana.domain.contract.dto.CalculatePaymentResponse;
-import com.interactive.hana.domain.contract.dto.ContractPerQuarterResponse;
-import com.interactive.hana.domain.contract.dto.TopUsernameResponse;
-import com.interactive.hana.domain.contract.dto.UwStateCountResponse;
+import com.interactive.hana.domain.contract.dto.*;
 import com.interactive.hana.global.config.security.auth.PrincipalDetails;
 import com.interactive.hana.global.dto.DefaultResponseDto;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import java.util.List;
 
 public interface ContractApiController<CreateReq> {
 
@@ -30,4 +28,7 @@ public interface ContractApiController<CreateReq> {
 
     @GetMapping("dashboard/top/username")
     ResponseEntity<TopUsernameResponse> getTopUsername();
+
+    @GetMapping("dashboard/top/insurance")
+    ResponseEntity<List<TopInsuranceResponse>> getTopInsurance();
 }
