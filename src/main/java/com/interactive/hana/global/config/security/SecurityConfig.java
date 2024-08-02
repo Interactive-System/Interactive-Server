@@ -38,6 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/api/v1/**/dashboard/**").permitAll() // dashboard가 포함된 URL에 대한 접근 허용
+                .antMatchers("/signup").permitAll()
+                .antMatchers("/api/v1/email-auth").permitAll()
                 .antMatchers("/api/v1/user/**")
                 .hasAnyRole("USER", "UW", "INSURANCE_PLANNER","INSURANCE_SELLER", "INSURANCE_COMPENSATION_PLANNER",
                         "INSURANCE_COMPENSATION_HANDLER", "CONTRACT_MANAGER", "FINANCIAL_SUPERVISORY_SERVICE", "ADMIN")
