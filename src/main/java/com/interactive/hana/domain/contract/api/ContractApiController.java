@@ -1,6 +1,7 @@
 package com.interactive.hana.domain.contract.api;
 
 import com.interactive.hana.domain.contract.dto.CalculatePaymentResponse;
+import com.interactive.hana.domain.contract.dto.ContractPerQuarterResponse;
 import com.interactive.hana.domain.contract.dto.UwStateCountResponse;
 import com.interactive.hana.global.config.security.auth.PrincipalDetails;
 import com.interactive.hana.global.dto.DefaultResponseDto;
@@ -22,4 +23,7 @@ public interface ContractApiController<CreateReq> {
 
     @GetMapping("dashboard/state/count")
     ResponseEntity<UwStateCountResponse> getUwStateCount();
+
+    @GetMapping("dashboard/quarter/count")
+    ResponseEntity<ContractPerQuarterResponse> getContractPerQuarter();
 }

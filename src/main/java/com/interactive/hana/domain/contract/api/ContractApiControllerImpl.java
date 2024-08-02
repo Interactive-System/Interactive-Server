@@ -3,6 +3,7 @@ package com.interactive.hana.domain.contract.api;
 import com.interactive.hana.domain.contract.constant.ContractConstants;
 import com.interactive.hana.domain.contract.domain.Contract;
 import com.interactive.hana.domain.contract.dto.CalculatePaymentResponse;
+import com.interactive.hana.domain.contract.dto.ContractPerQuarterResponse;
 import com.interactive.hana.domain.contract.dto.UwStateCountResponse;
 import com.interactive.hana.domain.contract.service.ContractService;
 import com.interactive.hana.domain.insurance.domain.Insurance;
@@ -36,4 +37,8 @@ public abstract class ContractApiControllerImpl<I extends Insurance, CreateReq, 
         return ResponseEntity.ok(this.contractService.getUwStateCount());
     }
 
+    @Override
+    public ResponseEntity<ContractPerQuarterResponse> getContractPerQuarter() {
+        return ResponseEntity.ok(this.contractService.getContractPerQuarter());
+    }
 }

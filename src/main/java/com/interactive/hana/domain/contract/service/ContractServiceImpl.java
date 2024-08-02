@@ -5,6 +5,7 @@ import com.interactive.hana.domain.contract.domain.Contract;
 import com.interactive.hana.domain.contract.domain.UwDueProcessType;
 import com.interactive.hana.domain.contract.dto.CalculatePaymentResponse;
 import com.interactive.hana.domain.contract.dto.ContractCreateRequest;
+import com.interactive.hana.domain.contract.dto.ContractPerQuarterResponse;
 import com.interactive.hana.domain.contract.dto.UwStateCountResponse;
 import com.interactive.hana.domain.contract.exception.ContractExceptionMessages;
 import com.interactive.hana.domain.contract.exception.ContractNotFoundException;
@@ -22,6 +23,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -97,5 +101,53 @@ public abstract class ContractServiceImpl<C extends Contract<Res>, DetailRes, I 
             }
         }
         return UwStateCountResponse.from(waitCount, approveCount, rejectCount);
+    }
+
+    public ContractPerQuarterResponse getContractPerQuarter() {
+        int carFirstQuarterCount = 0;
+        int carSecondQuarterCount = 0;
+        int carThirdQuarterCount = 0;
+        int carFourthQuarterCount = 0;
+
+        int travelFirstQuarterCount = 0;
+        int travelSecondQuarterCount = 0;
+        int travelThirdQuarterCount = 0;
+        int travelFourthQuarterCount = 0;
+
+        List<C> contracts = this.contractRepository.findAll();
+        for (C c : contracts) {
+            String dType = c.getDtype().toUpperCase();
+            Timestamp createdDate = c.getCreatedDate();
+            LocalDateTime localDateTime = createdDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+            int month = localDateTime.getMonthValue();
+
+            if (dType.equals("CAR")) {
+                if (month >= 1 && month <= 3) {
+                    carFirstQuarterCount++;
+                } else if (month >= 4 && month <= 6) {
+                    carSecondQuarterCount++;
+                } else if (month >= 7 && month <= 9) {
+                    carThirdQuarterCount++;
+                } else if (month >= 10 && month <= 12) {
+                    carFourthQuarterCount++;
+                }
+            } else if (dType.equals("TRAVEL")) {
+                if (month >= 1 && month <= 3) {
+                    travelFirstQuarterCount++;
+                } else if (month >= 4 && month <= 6) {
+                    travelSecondQuarterCount++;
+                } else if (month >= 7 && month <= 9) {
+                    travelThirdQuarterCount++;
+                } else if (month >= 10 && month <= 12) {
+                    travelFourthQuarterCount++;
+                }
+            }
+        }
+
+        ContractPerQuarterResponse response = ContractPerQuarterResponse.from(
+                carFirstQuarterCount, carSecondQuarterCount, carThirdQuarterCount, carFourthQuarterCount,
+                travelFirstQuarterCount, travelSecondQuarterCount, travelThirdQuarterCount, travelFourthQuarterCount
+        );
+        return response;
     }
 }
