@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @RequiredArgsConstructor
+@RequestMapping("api/v1")
 @RestController
 public class FileApi {
 
