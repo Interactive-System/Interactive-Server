@@ -55,4 +55,5 @@ jobs:
             if [ ! "$(sudo docker network ls -q -f name=hana_network)" ]; then
               sudo docker network create hana_network
             fi
-            sudo docker run -d -p 8080:8080 --name hana-server --network hana_network rlawjddn5980/hana-server:latest
+            sudo docker run -d -p 8080:8080 --name hana-server --network hana_network -v /home/ubuntu/logs:/logs rlawjddn5980/hana-server:latest
+
