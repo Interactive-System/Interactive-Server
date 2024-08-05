@@ -6,6 +6,7 @@ import com.interactive.hana.domain.user.domain.User;
 import com.interactive.hana.domain.user.domain.UserRoleType;
 import com.interactive.hana.domain.user.domain.UserStateType;
 import lombok.Getter;
+import lombok.ToString;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.Email;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Getter
+@ToString
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class SignUpUserRequest {
 

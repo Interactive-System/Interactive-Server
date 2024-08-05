@@ -10,6 +10,8 @@ import com.interactive.hana.domain.user.dto.UserInfoResponse;
 import com.interactive.hana.domain.user.service.UserServiceImpl;
 import com.interactive.hana.global.config.security.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 public class UserApiController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserApiController.class);
 
     private final UserServiceImpl userService;
 
