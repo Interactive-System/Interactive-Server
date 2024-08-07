@@ -25,7 +25,6 @@ public class LoggingAspect {
 
     @AfterThrowing(pointcut = "execution(* com.interactive.hana..*.*(..))", throwing = "exception")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable exception) {
-        logger.error("Exception in method: " + joinPoint.getSignature().getName());
-        logger.error("Exception: " + exception.getMessage(), exception);
+        logger.error(exception.getClass().getSimpleName() + ": " + exception.getMessage());
     }
 }
