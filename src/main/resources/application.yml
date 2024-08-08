@@ -41,7 +41,7 @@ management:
 logging:
   level:
     root: INFO
-    org.springframework: WARN
+    org.springframework: DEBUG
 
 server:
   forward-headers-strategy: framework
