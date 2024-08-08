@@ -39,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/v1/**/dashboard/**").permitAll() // dashboard가 포함된 URL에 대한 접근 허용
                 .antMatchers("/signup").permitAll()
+                .antMatchers("/login").permitAll()
                 .antMatchers("/api/v1/email-auth").permitAll()
                 .antMatchers("/api/v1/image/**").permitAll()
                 .antMatchers("/api/v1/file-save").permitAll()
