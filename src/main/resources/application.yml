@@ -43,6 +43,9 @@ logging:
     root: INFO
     org.springframework: WARN
 
+server:
+  forward-headers-strategy: native
+
 #spring:
 #  application:
 #    name: hana-server
@@ -87,4 +90,6 @@ logging:
 #  level:
 #    root: INFO
 #    org.springframework: WARN
-
+#
+#server:
+#  forward-headers-strategy: native
