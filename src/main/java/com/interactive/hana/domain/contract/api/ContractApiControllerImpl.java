@@ -51,4 +51,9 @@ public abstract class ContractApiControllerImpl<I extends Insurance, CreateReq, 
     public ResponseEntity<List<TopInsuranceResponse>> getTopInsurance() {
         return ResponseEntity.ok(this.contractService.getTopInsurance());
     }
+
+    @Override
+    public ResponseEntity<ContractRateResponse> getContractRate() {
+        return ResponseEntity.ok(this.contractService.getContractRate());
+    }
 }

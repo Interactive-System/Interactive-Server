@@ -41,4 +41,6 @@ public interface ContractService<I extends Insurance, CreateReq, Res, C extends 
     TopUsernameResponse getTopUsername();
 
     List<TopInsuranceResponse> getTopInsurance();
+
+    ContractRateResponse getContractRate();
 }

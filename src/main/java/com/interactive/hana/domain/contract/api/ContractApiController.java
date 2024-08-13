@@ -31,4 +31,7 @@ public interface ContractApiController<CreateReq> {
 
     @GetMapping("dashboard/top/insurance")
     ResponseEntity<List<TopInsuranceResponse>> getTopInsurance();
+
+    @GetMapping("dashboard/contract/rate")
+    ResponseEntity<ContractRateResponse> getContractRate();
 }

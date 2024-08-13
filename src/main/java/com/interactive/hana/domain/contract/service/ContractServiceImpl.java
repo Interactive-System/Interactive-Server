@@ -204,4 +204,19 @@ public abstract class ContractServiceImpl<C extends Contract<Res>, DetailRes, I 
 
         return topInsurances;
     }
+
+    @Override
+    public ContractRateResponse getContractRate() {
+        List<C> allContracts = contractRepository.findAll();
+
+        long totalCount = allContracts.size();
+
+        long approveCount = allContracts.stream()
+                .filter(contract -> UwDueProcessType.APPROVE.equals(contract.getUwDueProcessType()))
+                .count();
+
+        int approveRatio = totalCount > 0 ? (int) ((approveCount * 100) / totalCount) : 0;
+
+        return ContractRateResponse.from(approveRatio);
+    }
 }
