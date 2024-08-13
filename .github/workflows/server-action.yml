@@ -85,7 +85,7 @@ jobs:
         if: success()
         run: |
           NEW_CONTAINER_NAME=${{ steps.deploy_step.outputs.new_container_name }}  # 이전 단계에서 출력된 값을 가져옴
-          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"인터렉티브 하나 서버 배포가 완료되었습니다. 새로운 컨테이너: $NEW_CONTAINER_NAME\"}" https://hooks.slack.com/services/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
+          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"인터렉티브 하나 서버 배포가 완료되었습니다. 새로운 컨테이너: ${NEW_CONTAINER_NAME}\"}" https://hooks.slack.com/services/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
 
       - name: Notify Slack - Deployment Failed
         if: failure()
