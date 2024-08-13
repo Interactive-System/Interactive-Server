@@ -78,14 +78,14 @@ jobs:
               sudo docker rm $OLD_CONTAINER_NAME || true
             fi
 
-            # 새로운 컨테이너 이름을 환경 변수에 설정
-            echo "NEW_CONTAINER_NAME=${NEW_CONTAINER_NAME}" >> $GITHUB_ENV
+            # 새로운 컨테이너 이름을 GITHUB_ENV에 설정
+            echo "GITHUB_ENV=${GITHUB_ENV}"  # GITHUB_ENV 변수 출력
+            echo 'NEW_CONTAINER_NAME="${NEW_CONTAINER_NAME}"' >> $GITHUB_ENV
 
       - name: Notify Slack - Deployment Finished
         if: success()
         run: |
-          NEW_CONTAINER_NAME=${{ env.NEW_CONTAINER_NAME }}  # 환경 변수에서 새로운 컨테이너 이름 가져오기
-          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"인터렉티브 하나 서버 배포가 완료되었습니다. 새로운 컨테이너: ${NEW_CONTAINER_NAME}\"}" https://hooks.slack.com/services/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
+          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"인터렉티브 하나 서버 배포가 완료되었습니다. 새로운 컨테이너: ${{ env.NEW_CONTAINER_NAME }}\"}" https://hooks.slack.com/services/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
 
       - name: Notify Slack - Deployment Failed
         if: failure()
