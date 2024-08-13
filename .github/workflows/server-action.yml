@@ -41,7 +41,7 @@ jobs:
         run: docker push rlawjddn5980/hana-server:latest
 
       - name: Connect to WAS & Execute Application
-        id: deploy_step  # Step ID 추가
+        id: deploy_step
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.WAS_HOST }}
@@ -66,15 +66,14 @@ jobs:
             sudo docker run -d -p $PORT_MAPPING --name $NEW_CONTAINER_NAME --network hana_network -v /home/ubuntu/logs:/logs rlawjddn5980/hana-server:latest
 
             # Nginx 설정 업데이트
-            sudo sed -i "s/set \$target_server .*/set \$target_server \"$NEW_CONTAINER_NAME\";/" /home/ubuntu/nginx.conf
-            sudo sed -i "s/set \$target_port .*/set \$target_port \"$TARGET_PORT\";/" /home/ubuntu/nginx.conf
-            
-            sudo docker exec nginx sh -c "sudo sed -i 's/set \$target_server .*/set \$target_server \"$NEW_CONTAINER_NAME\";/' /etc/nginx/nginx.conf && sudo sed -i 's/set \$target_port .*/set \$target_port \"$TARGET_PORT\";/' /etc/nginx/nginx.conf"
+            if [ "$NEW_CONTAINER_NAME" = "hana-server-green" ]; then
+              sudo cp /home/ubuntu/nginx-green.conf nginx:/home/ubuntu/nginx.conf
+            else
+              sudo cp /home/ubuntu/nginx-blue.conf nginx:/home/ubuntu/nginx.conf
+            fi
 
-            sudo docker exec nginx cat /etc/nginx/nginx.conf | grep -E 'target_server|target_port'
-
-            # Nginx 재시작
-            sudo docker exec nginx nginx -s reload
+            # Nginx 재시작 임시로 .. 나중에 무중단 변경
+            sudo docker restart nginx
 
             # 이전 컨테이너 중지 및 제거
             if [ "$(sudo docker ps -q -f name=$OLD_CONTAINER_NAME)" ]; then
