@@ -66,8 +66,7 @@ jobs:
             sudo docker run -d -p $PORT_MAPPING --name $NEW_CONTAINER_NAME --network hana_network -v /home/ubuntu/logs:/logs rlawjddn5980/hana-server:latest
 
             # Nginx 설정 업데이트
-            sudo sed -i "s/set \$target_server .*/set \$target_server \"$NEW_CONTAINER_NAME\";/" /home/ubuntu/nginx.conf
-            sudo sed -i "s/set \$target_port .*/set \$target_port \"$TARGET_PORT\";/" /home/ubuntu/nginx.conf
+            sudo docker exec nginx sh -c "sed -i 's/set \$target_server .*/set \$target_server \"$NEW_CONTAINER_NAME\";/' /etc/nginx/nginx.conf && sed -i 's/set \$target_port .*/set \$target_port \"$TARGET_PORT\";/' /etc/nginx/nginx.conf"
 
             # Nginx 재시작
             sudo docker exec nginx nginx -s reload
