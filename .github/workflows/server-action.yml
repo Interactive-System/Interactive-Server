@@ -67,9 +67,9 @@ jobs:
 
             # Nginx 설정 업데이트
             if [ "$NEW_CONTAINER_NAME" = "hana-server-green" ]; then
-              sudo cp /home/ubuntu/nginx-green.conf nginx:/home/ubuntu/nginx.conf
-            else
               sudo cp /home/ubuntu/nginx-blue.conf nginx:/home/ubuntu/nginx.conf
+            else
+              sudo cp /home/ubuntu/nginx-green.conf nginx:/home/ubuntu/nginx.conf
             fi
 
             # Nginx 재시작 임시로 .. 나중에 무중단 변경
