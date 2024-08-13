@@ -7,8 +7,8 @@ spring:
     username: root
     password: root
     hikari:
-      maximum-pool-size: 10 # 최대 풀 크기
-      minimum-idle: 5       # 최소 유휴 커넥션 수
+      maximum-pool-size: 40 # 최대 풀 크기
+      minimum-idle: 20       # 최소 유휴 커넥션 수
       idle-timeout: 30000   # 유휴 커넥션 타임아웃 (밀리초)
       connection-timeout: 30000 # 커넥션 타임아웃 (밀리초)
       max-lifetime: 1800000 # 커넥션 최대 수명 (밀리초)
@@ -61,11 +61,11 @@ server:
 #    username: root
 #    password: root
 #    hikari:
-#      maximum-pool-size: 10 # 최대 풀 크기
-#      minimum-idle: 5       # 최소 유휴 커넥션 수
-#      idle-timeout: 30000   # 유휴 커넥션 타임아웃 (밀리초)
-#      connection-timeout: 30000 # 커넥션 타임아웃 (밀리초)
-#      max-lifetime: 1800000 # 커넥션 최대 수명 (밀리초)
+#    maximum-pool-size: 40 # 최대 풀 크기
+#    minimum-idle: 20       # 최소 유휴 커넥션 수
+#    idle-timeout: 30000   # 유휴 커넥션 타임아웃 (밀리초)
+#    connection-timeout: 30000 # 커넥션 타임아웃 (밀리초)
+#    max-lifetime: 1800000 # 커넥션 최대 수명 (밀리초)
 #
 #  jpa:
 #    database: mysql
