@@ -16,6 +16,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Notify Slack - Deployment Started
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"배포가 시작되었습니다."}' https://hooks.slack.com/services/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
+
       - name: Gradle Build
         run: ./gradlew bootJar
 
@@ -57,3 +61,12 @@ jobs:
             fi
             sudo docker run -d -p 8080:8080 --name hana-server --network hana_network -v /home/ubuntu/logs:/logs rlawjddn5980/hana-server:latest
 
+      - name: Notify Slack - Deployment Finished
+        if: success()
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"인터렉티브 하나 서버 배포가 완료되었습니다."}' https://hooks.slack.com/services/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
+
+      - name: Notify Slack - Deployment Failed
+        if: failure()
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"인터렉티브 하나 서버 배포에 실패했습니다."}' https://hooks.slack.com/services/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
