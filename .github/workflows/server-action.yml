@@ -18,7 +18,7 @@ jobs:
 
       - name: Notify Slack - Deployment Started
         run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"배포가 시작되었습니다."}' https://hooks.slack.com/services/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
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"인터렉티브 하나 서버 배포가 시작되었습니다."}' https://hooks.slack.com/services/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
 
       - name: Gradle Build
         run: ./gradlew bootJar
