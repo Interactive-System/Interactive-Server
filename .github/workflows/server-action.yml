@@ -66,8 +66,8 @@ jobs:
             sudo docker run -d -p $PORT_MAPPING --name $NEW_CONTAINER_NAME --network hana_network -v /home/ubuntu/logs:/logs rlawjddn5980/hana-server:latest
 
             # Nginx 설정 업데이트
-            sudo sed -i "s/set \$target_server .*/set \$target_server \"$NEW_CONTAINER_NAME\";/" /home/ubuntu/nginx.conf
-            sudo sed -i "s/set \$target_port .*/set \$target_port \"$TARGET_PORT\";/" /home/ubuntu/nginx.conf
+            sudo sed -i "s/set \$target_server .*/set \$target_server \"$NEW_CONTAINER_NAME\";/" /etc/nginx/nginx.conf
+            sudo sed -i "s/set \$target_port .*/set \$target_port \"$TARGET_PORT\";/" /etc/nginx/nginx.conf
 
             # Nginx 재시작
             sudo docker exec nginx nginx -s reload
@@ -81,7 +81,7 @@ jobs:
       - name: Notify Slack - Deployment Finished
         if: success()
         run: |
-          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"인터렉티브 하나 서버 배포가 완료되었습니다."}" https://hooks.slack.com/services/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
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"인터렉티브 하나 서버 배포가 완료되었습니다."}' https://hooks.slack.com/services/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
 
       - name: Notify Slack - Deployment Failed
         if: failure()
