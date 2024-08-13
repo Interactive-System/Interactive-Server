@@ -6,6 +6,12 @@ spring:
     url: jdbc:mysql://mysql_container:3306/insurance?serverTimezone=Asia/Seoul
     username: root
     password: root
+    hikari:
+      maximum-pool-size: 10 # 최대 풀 크기
+      minimum-idle: 5       # 최소 유휴 커넥션 수
+      idle-timeout: 30000   # 유휴 커넥션 타임아웃 (밀리초)
+      connection-timeout: 30000 # 커넥션 타임아웃 (밀리초)
+      max-lifetime: 1800000 # 커넥션 최대 수명 (밀리초)
 
   jpa:
     database: mysql
@@ -54,6 +60,12 @@ server:
 #    url: jdbc:mysql://13.124.207.110:3306/insurance?serverTimezone=Asia/Seoul
 #    username: root
 #    password: root
+#    hikari:
+#      maximum-pool-size: 10 # 최대 풀 크기
+#      minimum-idle: 5       # 최소 유휴 커넥션 수
+#      idle-timeout: 30000   # 유휴 커넥션 타임아웃 (밀리초)
+#      connection-timeout: 30000 # 커넥션 타임아웃 (밀리초)
+#      max-lifetime: 1800000 # 커넥션 최대 수명 (밀리초)
 #
 #  jpa:
 #    database: mysql
