@@ -41,7 +41,7 @@ jobs:
         run: docker push rlawjddn5980/hana-server:latest
 
       - name: Connect to WAS & Execute Application
-        id: deploy_step
+        id: deploy_step  # Step ID 추가
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.WAS_HOST }}
@@ -66,11 +66,11 @@ jobs:
             sudo docker run -d -p $PORT_MAPPING --name $NEW_CONTAINER_NAME --network hana_network -v /home/ubuntu/logs:/logs rlawjddn5980/hana-server:latest
 
             # Nginx 설정 업데이트
-            echo "set \$target_server \"$NEW_CONTAINER_NAME\";" | sudo tee /home/ubuntu/nginx.conf
-            echo "set \$target_port \"$TARGET_PORT\";" | sudo tee -a /home/ubuntu/nginx.conf
+            sudo sed -i "s/set \$target_server .*/set \$target_server \"$NEW_CONTAINER_NAME\";/" /home/ubuntu/nginx.conf
+            sudo sed -i "s/set \$target_port .*/set \$target_port \"$TARGET_PORT\";/" /home/ubuntu/nginx.conf
 
             # Nginx 재시작
-            sudo nginx -s reload
+            sudo docker exec nginx nginx -s reload
 
             # 이전 컨테이너 중지 및 제거
             if [ "$(sudo docker ps -q -f name=$OLD_CONTAINER_NAME)" ]; then
@@ -78,14 +78,10 @@ jobs:
               sudo docker rm $OLD_CONTAINER_NAME || true
             fi
 
-            # 새로운 컨테이너 이름을 GITHUB_ENV에 설정
-            echo "GITHUB_ENV=${GITHUB_ENV}"  # GITHUB_ENV 변수 출력
-            echo 'NEW_CONTAINER_NAME="${NEW_CONTAINER_NAME}"' >> $GITHUB_ENV
-
       - name: Notify Slack - Deployment Finished
         if: success()
         run: |
-          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"인터렉티브 하나 서버 배포가 완료되었습니다. 새로운 컨테이너: ${{ env.NEW_CONTAINER_NAME }}\"}" https://hooks.slack.com/services/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
+          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"인터렉티브 하나 서버 배포가 완료되었습니다."}" https://hooks.slack.com/services/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
 
       - name: Notify Slack - Deployment Failed
         if: failure()
