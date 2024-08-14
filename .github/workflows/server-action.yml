@@ -65,7 +65,7 @@ jobs:
             # 새로운 컨테이너 실행
             sudo docker run -d -p $PORT_MAPPING --name $NEW_CONTAINER_NAME --network hana_network -v /home/ubuntu/logs:/logs rlawjddn5980/hana-server:latest
 
-            docker exec -it nginx sh -c 'sed -i "s/set \$service_ip .*/set \$service_ip \"$NEW_CONTAINER_NAME\";/" /etc/nginx/conf.d/service-url.inc && sed -i "s/set \$service_port .*/set \$service_port \"$TARGET_PORT\";/" /etc/nginx/conf.d/service-url.inc && nginx -s reload'
+            sudo docker exec -it nginx sh -c 'sed -i "s/set \$service_ip .*/set \$service_ip \"$NEW_CONTAINER_NAME\";/" /etc/nginx/conf.d/service-url.inc && sed -i "s/set \$service_port .*/set \$service_port \"$TARGET_PORT\";/" /etc/nginx/conf.d/service-url.inc && nginx -s reload'
 
             # Nginx 재시작 임시로 .. 나중에 무중단 변경
             sudo docker exec nginx nginx -s reload
