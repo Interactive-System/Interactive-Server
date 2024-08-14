@@ -49,7 +49,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            # 현재 활성화된 컨테이너 확인
+            # 현재 활성화된 컨테이너 확인 
             if [ "$(sudo docker ps -q -f name=hana-server-blue)" ]; then
               NEW_CONTAINER_NAME="hana-server-green"
               OLD_CONTAINER_NAME="hana-server-blue"
