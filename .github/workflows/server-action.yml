@@ -65,15 +65,10 @@ jobs:
             # 새로운 컨테이너 실행
             sudo docker run -d -p $PORT_MAPPING --name $NEW_CONTAINER_NAME --network hana_network -v /home/ubuntu/logs:/logs rlawjddn5980/hana-server:latest
 
-            # Nginx 설정 업데이트
-            if [ "$NEW_CONTAINER_NAME" = "hana-server-green" ]; then
-              sudo cp /home/ubuntu/nginx-blue.conf nginx:/home/ubuntu/nginx.conf
-            else
-              sudo cp /home/ubuntu/nginx-green.conf nginx:/home/ubuntu/nginx.conf
-            fi
+            docker exec -it nginx sh -c 'sed -i "s/set \$service_ip .*/set \$service_ip \"$NEW_CONTAINER_NAME\";/" /etc/nginx/conf.d/service-url.inc && sed -i "s/set \$service_port .*/set \$service_port \"$TARGET_PORT\";/" /etc/nginx/conf.d/service-url.inc && nginx -s reload'
 
             # Nginx 재시작 임시로 .. 나중에 무중단 변경
-            sudo docker restart nginx
+            sudo docker exec nginx nginx -s reload
 
             # 이전 컨테이너 중지 및 제거
             if [ "$(sudo docker ps -q -f name=$OLD_CONTAINER_NAME)" ]; then
