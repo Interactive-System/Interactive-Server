@@ -49,28 +49,24 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            # 현재 활성화된 컨테이너 확인 
             if [ "$(sudo docker ps -q -f name=hana-server-blue)" ]; then
               NEW_CONTAINER_NAME="hana-server-green"
               OLD_CONTAINER_NAME="hana-server-blue"
-              PORT_MAPPING="8081:8081"  # 블루가 활성화된 경우 8081 사용
+              PORT_MAPPING="8081:8081" 
               TARGET_PORT="8081"
             else
               NEW_CONTAINER_NAME="hana-server-blue"
               OLD_CONTAINER_NAME="hana-server-green"
-              PORT_MAPPING="8080:8080"  # 그린이 활성화된 경우 8080 사용
+              PORT_MAPPING="8080:8080" 
               TARGET_PORT="8080"
             fi
 
-            # 새로운 컨테이너 실행
             sudo docker run -d -p $PORT_MAPPING --name $NEW_CONTAINER_NAME --network hana_network -v /home/ubuntu/logs:/logs -e SERVER_PORT=$TARGET_PORT rlawjddn5980/hana-server:latest
 
             sudo docker exec nginx sh -c 'sed -i "s/set \$service_ip .*/set \$service_ip \"'"$NEW_CONTAINER_NAME"'\";/" /etc/nginx/conf.d/service-url.inc; sed -i "s/set \$service_port .*/set \$service_port \"'"$TARGET_PORT"'\";/" /etc/nginx/conf.d/service-url.inc; nginx -s reload'
             
-            # Nginx 재시작 임시로 .. 나중에 무중단 변경
             sudo docker exec nginx nginx -s reload
 
-            # 이전 컨테이너 중지 및 제거
             if [ "$(sudo docker ps -q -f name=$OLD_CONTAINER_NAME)" ]; then
               sudo docker stop $OLD_CONTAINER_NAME || true
               sudo docker rm $OLD_CONTAINER_NAME || true
