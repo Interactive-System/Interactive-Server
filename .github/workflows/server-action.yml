@@ -61,6 +61,10 @@ jobs:
               TARGET_PORT="8080"
             fi
 
+            sudo docker rmi rlawjddn5980/hana-server:latest || true
+
+            sudo docker pull rlawjddn5980/hana-server:latest
+
             sudo docker run -d -p $PORT_MAPPING --name $NEW_CONTAINER_NAME --network hana_network -v /home/ubuntu/logs:/logs -v /home/ubuntu/images:/images -e SERVER_PORT=$TARGET_PORT rlawjddn5980/hana-server:latest
 
             sudo docker exec nginx sh -c 'sed -i "s/set \$service_ip .*/set \$service_ip \"'"$NEW_CONTAINER_NAME"'\";/" /etc/nginx/conf.d/service-url.inc; sed -i "s/set \$service_port .*/set \$service_port \"'"$TARGET_PORT"'\";/" /etc/nginx/conf.d/service-url.inc; nginx -s reload'
