@@ -74,6 +74,8 @@ jobs:
               sudo docker rm $OLD_CONTAINER_NAME || true
             fi
 
+            docker rmi $(docker images -f "dangling=true" -q) || true
+
       - name: Notify Slack - Deployment Finished
         if: success()
         run: |
