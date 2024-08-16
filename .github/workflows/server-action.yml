@@ -61,8 +61,6 @@ jobs:
               TARGET_PORT="8080"
             fi
 
-            sudo docker rmi rlawjddn5980/hana-server:latest || true
-
             sudo docker pull rlawjddn5980/hana-server:latest
 
             sudo docker run -d -p $PORT_MAPPING --name $NEW_CONTAINER_NAME --network hana_network -v /home/ubuntu/logs:/logs -v /home/ubuntu/images:/images -e SERVER_PORT=$TARGET_PORT rlawjddn5980/hana-server:latest
