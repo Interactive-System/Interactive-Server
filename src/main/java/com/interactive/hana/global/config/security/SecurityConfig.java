@@ -43,7 +43,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/email-auth").permitAll()
                 .antMatchers("/api/v1/image/**").permitAll()
                 .antMatchers("/api/v1/file-save").permitAll()
-                .antMatchers("/api/v1/email-auth").permitAll()
                 .antMatchers("/actuator/prometheus").permitAll()
                 .antMatchers("/api/v1/user/**")
                 .hasAnyRole("USER", "UW", "INSURANCE_PLANNER","INSURANCE_SELLER", "INSURANCE_COMPENSATION_PLANNER",

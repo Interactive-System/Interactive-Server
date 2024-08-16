@@ -6,6 +6,7 @@ import com.interactive.hana.domain.user.exception.WithdrawalAccountException;
 import com.interactive.hana.global.config.security.exception.ErrorCode;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.util.AntPathMatcher;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -24,6 +25,26 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+        String requestUri = request.getRequestURI();
+        AntPathMatcher pathMatcher = new AntPathMatcher();
+
+        logger.info("Request URL - " + request.getRequestURL());
+
+        if (pathMatcher.match("/api/v1/**/dashboard/**", requestUri) ||
+                pathMatcher.match("/api/v1/image/**", requestUri) ||
+                pathMatcher.match("/v3/api-docs/**", requestUri) ||
+                pathMatcher.match("/swagger-ui/**", requestUri) ||
+                requestUri.equals("/signup") ||
+                requestUri.equals("/login") ||
+                requestUri.equals("/api/v1/email-auth") ||
+                requestUri.equals("/api/v1/file-save") ||
+                requestUri.equals("/swagger-ui.html") ||
+                requestUri.equals("/actuator/prometheus") ||
+                requestUri.equals("/favicon.ico")) {
+            chain.doFilter(request, response);
+            return;
+        }
+
         try {
             String username = jwtTokenProvider.validateToken(request);
             if (!username.equals("")) {
