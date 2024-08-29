@@ -4,8 +4,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://mysql_container:3306/insurance?serverTimezone=Asia/Seoul
-    username: root
-    password: root
+    username: admin
+    password: admin
     hikari:
       maximum-pool-size: 40 # 최대 풀 크기
       minimum-idle: 20       # 최소 유휴 커넥션 수
@@ -59,9 +59,9 @@ logging:
 #    name: hana-server
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://13.124.207.110:3306/insurance?serverTimezone=Asia/Seoul
-#    username: root
-#    password: root
+#    url: jdbc:mysql://interactive-hana.shop:3306/insurance?serverTimezone=Asia/Seoul
+#    username: admin
+#    password: admin
 #    hikari:
 #    maximum-pool-size: 40 # 최대 풀 크기
 #    minimum-idle: 20       # 최소 유휴 커넥션 수
